@@ -6,7 +6,7 @@
 * Crear funcionalidades de back y forward de un navegador.
 * Federico Martin Fukushima / Mollon Rodrigo
 * Creado: 10-09-2017
-* Ultima edicion: 12-09-2017
+* Ultima edicion: 14-09-2017
 Copyright © 2017
 */
 
@@ -23,8 +23,13 @@ unsigned length(const stack&);
 string actual;
 stack pasado;
 stack futuro;
+void irALaAnterior(stack&, string);
+void irALaPosterior (stack&, string);
+void irAActual (stack&, string);
+void mostrarActual (std::string);
 
 int main(){
+	std::cout<<"Ingrese la direccion a la que desea acceder: (b = back / f = forward / e = exit) \n";
 	void leerLinea();
 	char getTipo(std::string);
 	void accionar(char);
@@ -68,8 +73,41 @@ void accionar (char accion){
 	}
 }
 
+void irALaAnterior(stack pasado, stack futuro, std::string actual){
+	if (top(pasado)>0){
+		push(futuro, actual);
+		actual = top(pasado);
+		pop(pasado);
+		mostrarActual (actual);
+		
+	}else{
+		std::cout<<"No es posible realizar esa operacion, no hay mas paginas previas. \n";
+	     }
 
-			
+void irALaPosterior(stack pasado, stack futuro, std::string actual){
+	if (top(futuro)>0){
+		push(pasado, actual);
+		actual = top(futuro);
+		pop(futuro);
+		mostrarActual (actual);
+		
+	}else{
+		std::cout<<"No es posible realizar esa operacion, no hay mas paginas posteriores. \n";
+	     }	
+}
+
+void irAActual(stack pasado, stack futuro, std::string actual){
+		push(pasado, actual);
+		mostrarActual(actual);
+		for (i=lenght(futuro);i>0;i--){
+			pop(futuro);
+		}
+		mostrarActual (actual);
+		
+	}else{
+		std::cout<<"No es posible realizar esa operacion, no hay mas paginas posteriores. \n";
+	     }	
+}			
 
 	/*
 	hacer actual <- leer linea
@@ -113,19 +151,6 @@ void accionar (char accion){
 	std::cout<<"\ntercer pop, luego de otro push: "<<pop(s)<<"\n";
 } while (actual != "e");
 
-	queue t;
-	std::cout<<"\ndequeue con cola vacia\n";
-	std::cout<<deQueue(t);
-	std::cout<<"\nfirst con cola vacia\n";
-	std::cout<<first(t);
-	enQueue(t, 10);
-	enQueue(t, 11);
-	std::cout<<"\nfirst cola: "<<first(t)<<"\n";
-	std::cout<<"primer dequeue: "<<deQueue(t)<<"\n";
-	std::cout<<"segundo dequeue: "<<deQueue(t)<<"\n";
-	enQueue(t, 12);
-	std::cout<<"\ntercer dequeue, luego de otro enqueue: "<<deQueue(t)<<"\n";
-	
 	
 	push(s, 5);
 	push(s, 9);
@@ -168,36 +193,7 @@ unsigned length(const stack& s){
 	return s.i;
 }
 
-void enQueue(queue& t, int y){
-	if (t.size_t < N){
-		t.b.at(t.rear) = y;
-		++t.size_t;
-		t.rear = (t.rear+1) % N;
-	}else {
-		std::cout<<"Se supero el tamaño maximo del Queue, considere redimensionar\n";
-	}
-}
-int deQueue(queue& t){
-	if (t.size_t > 0){
-		--t.size_t;
-		t.front = (t.front+1) % N;
-		return t.b.at(t.front-1);
-	} else {
-		std::cout<<"El Queue se encuentra vacio\n";
-		return 0;
-	}
-}
-int first(const queue& t){
-	if (t.size_t != 0){
-		return t.b.at(t.front);
-	} else {
-		std::cout<<"El Queue se encuentra vacio\n";
-		return 0;
-	}
-}
-unsigned length(const queue& t){
-	return t.size_t;
-}
+
 
 
 
