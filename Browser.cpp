@@ -20,7 +20,7 @@ void push(stack&, int);
 int pop(stack&);
 int top(const stack&);
 unsigned length(const stack&);
-string actual;
+std::string actual;
 stack pasado;
 stack futuro;
 void irALaAnterior(stack&, string);
@@ -60,7 +60,7 @@ void accionar (char accion){
 		case 'b' : 
 			if (length(pasado) > 0)
 				irALaAnterior(pasado);
-			brak;
+			break;
 		case 'f':
 			if (length(futuro)>0)
 				irALaPosterior;
