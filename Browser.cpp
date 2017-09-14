@@ -23,9 +23,9 @@ unsigned length(const stack&);
 std::string actual;
 stack pasado;
 stack futuro;
-void irALaAnterior(stack&, string);
-void irALaPosterior (stack&, string);
-void irAActual (stack&, string);
+void irALaAnterior(stack&, stack&, string);
+void irALaPosterior (stack&, stack&, string);
+void irAActual (stack&, stack&, string);
 void mostrarActual (std::string);
 unsigned contadordepaginas = 0;
 
@@ -37,6 +37,7 @@ int main(){
 	do {
 		accionar(getTipo(leerLinea()));
 	} while (actual != e);
+	:fin;
 	return 0;
 }
 
@@ -66,8 +67,7 @@ void accionar (char accion){
 				irALaPosterior;
 			break;
 		case 'e':
-			
-			return 'e';
+			goto fin;
 			break;
 		case 'a': 
 			irAActual(actual);
