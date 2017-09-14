@@ -27,9 +27,9 @@ void irALaAnterior(stack&, string);
 void irALaPosterior (stack&, string);
 void irAActual (stack&, string);
 void mostrarActual (std::string);
+unsigned contadordepaginas = 0;
 
 int main(){
-	std::cout<<"Ingrese la direccion a la que desea acceder: (b = back / f = forward / e = exit) \n";
 	void leerLinea();
 	char getTipo(std::string);
 	void accionar(char);
@@ -41,6 +41,7 @@ int main(){
 }
 
 void leerLinea (){
+	std::cout<<"Ingrese la direccion a la que desea acceder: (b = back / f = forward / e = exit) \n";
 	std::cin>>actual;
 }
 
@@ -57,14 +58,15 @@ char getTipo(std::string actual){
 void accionar (char accion){
 	switch (accion) {
 		case 'b' : 
-			if (lenght(pasado) > 0)
+			if (length(pasado) > 0)
 				irALaAnterior(pasado);
 			brak;
 		case 'f':
-			if (lenght(futuro)>0)
+			if (length(futuro)>0)
 				irALaPosterior;
 			break;
 		case 'e':
+			
 			return 'e';
 			break;
 		case 'a': 
@@ -97,71 +99,20 @@ void irALaPosterior(stack pasado, stack futuro, std::string actual){
 }
 
 void irAActual(stack pasado, stack futuro, std::string actual){
+	if (contadordepaginas >0){
 		push(pasado, actual);
 		mostrarActual(actual);
-		for (i=lenght(futuro);i>0;i--){
+		for (i=length(futuro);i>0;i--)
 			pop(futuro);
-		}
 		mostrarActual (actual);
-		
 	}else{
-		std::cout<<"No es posible realizar esa operacion, no hay mas paginas posteriores. \n";
-	     }	
-}			
+		contadordepaginas=contadordepaginas++
+		mostrarActual(actual);
+	}	
+}
 
-	/*
-	hacer actual <- leer linea
-	si actual != e && != b && != f
-		mensaje: ahora se encuentra en actual
-		destruir futuro
-	else si actual = b
-		si pasado.top != NULL
-			futuro.top = actual
-			actual = pasado.top
-			pop(pasado)
-			mensaje: "ahora se encuentra en actual"
-		else
-			mensaje: "No hay paginas anteriores"
-	else si actual = f
-		si futuro.top != NULL
-			pasado.top = actual
-			actual = futuro.top
-			pop(futuro)
-			mensaje: "ahora se encuentra en actual"
-		else 
-			mensaje: "no hay paginas posteriores"
-	mientras actual != e
-	
-	*/
-	
-	do {
-	std::cout<<"Ingrese la pagina que desea acceder: \n(b=regresar una pagina / f=avanzar una pagina / e=salir del browser \n)";
-	std::cin>>actual;
-	getTipoLinea();
-	
-	
-	
-	std::cout<<top(s);
-	push(s, 13);
-	push(s, 14);
-	std::cout<<"\ntop pila: "<<top(s)<<"\n";
-	std::cout<<"primer pop: "<<pop(s)<<"\n";
-	std::cout<<"segundo pop: "<<pop(s)<<"\n";
-	push(s, 15);
-	std::cout<<"\ntercer pop, luego de otro push: "<<pop(s)<<"\n";
-} while (actual != "e");
-
-	
-	push(s, 5);
-	push(s, 9);
-	push(s, 7);
-	push(s, 0);
-	push(s, 7);
-	push(s, 9);
-	push(s, 5);
-	
-	
-
+void mostrarActual (std::string actual){
+	std::cout << "usted se encuentra en la pagina: " << actual << "\n";
 }
 
 void push (stack& s, int x){
