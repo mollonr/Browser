@@ -16,30 +16,61 @@ struct stack{std::array<string,N> a;
 	unsigned i=0;
 };
 
-struct queue{
-	std::array<string,N> b;
-	unsigned front=0, rear=0;
-	unsigned size_t = 0;
-};
-
 void push(stack&, int);
 int pop(stack&);
 int top(const stack&);
 unsigned length(const stack&);
-
-void enQueue(queue&, int);
-int deQueue(queue&);
-int first(const queue&);
-unsigned length(const queue&);
+string actual;
+stack pasado;
+stack futuro;
 
 int main(){
-	string back(stack&);
-	string forward(queue&);
+	void leerLinea();
+	char getTipo(std::string);
+	void accionar(char);
 	
-	string actual;
-	stack pasado;
-	stack futuro;
-	
+	do {
+		accionar(getTipo(leerLinea()));
+	} while (actual != e);
+	return 0;
+}
+
+void leerLinea (){
+	std::cin>>actual;
+}
+
+char getTipo(std::string actual){
+	if (actual == "b" || actual == "B")
+	return 'b';
+	if (actual == "f" || actual == "F")
+	return 'f';
+	if (actual == "e" || actual == "E"){
+	return 'e';
+	}else{ return 'a';
+	     }
+}
+void accionar (char accion){
+	switch (accion) {
+		case 'b' : 
+			if (lenght(pasado) > 0)
+				irALaAnterior(pasado);
+			brak;
+		case 'f':
+			if (lenght(futuro)>0)
+				irALaPosterior;
+			break;
+		case 'e':
+			return 'e';
+			break;
+		case 'a': 
+			irAActual(actual);
+			break;
+	}
+}
+
+
+			
+
 	/*
 	hacer actual <- leer linea
 	si actual != e && != b && != f
